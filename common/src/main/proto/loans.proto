@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package com.manerajona.loans.common.model;
+
+option java_multiple_files = true;
+
+service LoanService {
+
+  rpc createLoan(Loan) returns (LoanId);
+
+  rpc readLoan(LoanId) returns (Loan);
+
+  rpc renegotiateLoan(Loan) returns (google.protobuf.Empty);
+
+  rpc deleteLoan(LoanId) returns (google.protobuf.Empty);
+}
+
+message Loan {
+  string guid = 1;
+  double requested_amount = 2;
+  int32 term_months = 3;
+  float annual_interest = 4;
+  message borrower {
+    string name = 1;
+    int32 age = 2;
+    double annual_income = 3;
+    optional double annual_debt = 4;
+    optional bool delinquent_debt = 5;
+  }
+}
+
+message LoanId {
+  string guid = 1;
+}
