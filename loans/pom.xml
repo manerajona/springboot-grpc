@@ -16,5 +16,10 @@
             <groupId>com.manerajona</groupId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.lognet</groupId>
+            <artifactId>grpc-spring-boot-starter</artifactId>
+            <version>5.1.4</version>
+        </dependency>
     </dependencies>
 </project>

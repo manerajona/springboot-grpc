@@ -9,6 +9,13 @@
     <name>Spring gRPC Parent</name>
     <packaging>pom</packaging>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <modules>
         <module>accounts</module>
         <module>loans</module>
@@ -20,15 +27,14 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <grpc.version>1.40.1</grpc.version>
-        <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
-        <protobuf.version>3.19.6</protobuf.version>
-        <javax.annotation-api.version>1.2</javax.annotation-api.version>
-        <os-maven-plugin.version>1.6.2</os-maven-plugin.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <artifactId>junit-jupiter</artifactId>
             <groupId>org.junit.jupiter</groupId>

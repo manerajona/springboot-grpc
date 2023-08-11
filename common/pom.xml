@@ -10,37 +10,11 @@
         <version>0.0.1</version>
     </parent>
 
-    <build>
-        <extensions>
-            <extension>
-                <artifactId>os-maven-plugin</artifactId>
-                <groupId>kr.motd.maven</groupId>
-                <version>${os-maven-plugin.version}</version>
-            </extension>
-        </extensions>
-        <plugins>
-            <plugin>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <configuration>
-                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
-                    </pluginArtifact>
-                    <pluginId>grpc-java</pluginId>
-                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
-                    </protocArtifact>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>compile-custom</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <groupId>org.xolstice.maven.plugins</groupId>
-                <version>${protobuf-maven-plugin.version}</version>
-            </plugin>
-        </plugins>
-    </build>
+    <properties>
+        <grpc.version>1.40.1</grpc.version>
+        <protobuf.version>3.19.6</protobuf.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <artifactId>grpc-netty-shaded</artifactId>
@@ -66,7 +40,39 @@
         <dependency>
             <artifactId>javax.annotation-api</artifactId>
             <groupId>javax.annotation</groupId>
-            <version>${javax.annotation-api.version}</version>
+            <version>1.2</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <extensions>
+            <extension>
+                <artifactId>os-maven-plugin</artifactId>
+                <groupId>kr.motd.maven</groupId>
+                <version>1.6.2</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <plugin>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <version>0.6.1</version>
+                <configuration>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+                    </pluginArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
+                    </protocArtifact>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

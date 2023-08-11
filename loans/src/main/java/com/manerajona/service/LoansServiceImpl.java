@@ -1,21 +1,22 @@
-package com.manerajona.ports.input.grpc;
+package com.manerajona.service;
 
 import com.google.protobuf.Empty;
-import com.manerajona.loans.common.grpc.Loan;
-import com.manerajona.loans.common.grpc.LoanId;
-import com.manerajona.loans.common.grpc.LoanServiceGrpc.LoanServiceImplBase;
+import com.manerajona.common.grpc.loans.Loan;
+import com.manerajona.common.grpc.loans.LoanId;
+import com.manerajona.common.grpc.loans.LoansServiceGrpc.LoansServiceImplBase;
 import io.grpc.stub.StreamObserver;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import org.lognet.springboot.grpc.GRpcService;
 
-public class LoanServiceImpl extends LoanServiceImplBase {
+@GRpcService
+public class LoansServiceImpl extends LoansServiceImplBase {
 
     private final ConcurrentMap<LoanId, Loan> loans = new ConcurrentHashMap<>();
 
     @Override
     public void createLoan(Loan loan, StreamObserver<LoanId> responseObserver) {
         LoanId loanId = LoanId.newBuilder().setGuid(loan.getGuid()).build();
-
         loans.put(loanId, loan);
 
         responseObserver.onNext(loanId);
